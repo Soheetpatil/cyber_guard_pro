@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Response - CyberGuard Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="nav-logo">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2L35 10V18C35 27.5 28.5 36.5 20 38C11.5 36.5 5 27.5 5 18V10L20 2Z" fill="url(#logoGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                            <path d="M20 8L28 12V18C28 24 24 29 20 30C16 29 12 24 12 18V12L20 8Z" fill="rgba(255,255,255,0.2)"/>
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4facfe"/>
+                                    <stop offset="100%" style="stop-color:#00f2fe"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>CyberGuard Pro</span>
+                    </a>
+                    <div class="nav-tagline">Enterprise Security</div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Overview</a></li>
+                    <li><a href="cyber-threats.html" class="nav-link">Threat Intelligence</a></li>
+                    <li><a href="safety-tips.html" class="nav-link">Best Practices</a></li>
+                    <li><a href="report-crime.html" class="nav-link active">Incident Response</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="#contact" class="btn btn-outline-sm">Get Started</a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <div class="page-badge">
+                        <span class="badge-icon">🚨</span>
+                        <span>Incident Response</span>
+                    </div>
+                    <h1>Cybercrime Reporting & Response</h1>
+                    <p>Comprehensive guide for reporting cyber incidents and coordinating effective response strategies</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="report-content">
+            <div class="container">
+                <div class="emergency-notice">
+                    <h2>🚨 Emergency Response Protocol</h2>
+                    <p>For immediate threats to life, safety, or critical infrastructure, contact emergency services (911 in the US) immediately. For active cyber incidents affecting your organization, initiate your incident response plan and contact your security team.</p>
+                </div>
+
+                <div class="reporting-agencies">
+                    <h2>Official Reporting Agencies</h2>
+                    
+                    <div class="agency-grid">
+                        <div class="agency-card">
+                            <div class="agency-header">
+                                <div class="agency-icon">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M16 4L26 8V14C26 21 21 27 16 28C11 27 6 21 6 14V8L16 4Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                        <path d="M12 16L15 19L20 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3>FBI Internet Crime Complaint Center (IC3)</h3>
+                            </div>
+                            <div class="agency-content">
+                                <p><strong>Primary Focus:</strong> Federal cybercrime investigation and coordination</p>
+                                <p><strong>Website:</strong> <a href="https://www.ic3.gov" target="_blank">ic3.gov</a></p>
+                                <p><strong>Phone:</strong> 1-800-CALL-FBI (1-800-225-5324)</p>
+                                
+                                <div class="agency-types">
+                                    <h4>Report These Incidents:</h4>
+                                    <ul>
+                                        <li>Business Email Compromise (BEC)</li>
+                                        <li>Ransomware attacks</li>
+                                        <li>Online fraud and scams</li>
+                                        <li>Identity theft</li>
+                                        <li>Cryptocurrency fraud</li>
+                                        <li>Intellectual property theft</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="response-time">
+                                    <strong>Response Time:</strong> 24-48 hours for acknowledgment
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="agency-card">
+                            <div class="agency-header">
+                                <div class="agency-icon">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16Z" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M16 12V20M16 8H16.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <h3>CISA Cybersecurity & Infrastructure Security Agency</h3>
+                            </div>
+                            <div class="agency-content">
+                                <p><strong>Primary Focus:</strong> Critical infrastructure protection and coordination</p>
+                                <p><strong>Website:</strong> <a href="https://www.cisa.gov/report" target="_blank">cisa.gov/report</a></p>
+                                <p><strong>Phone:</strong> 1-888-282-0870</p>
+                                
+                                <div class="agency-types">
+                                    <h4>Report These Incidents:</h4>
+                                    <ul>
+                                        <li>Critical infrastructure attacks</li>
+                                        <li>Advanced Persistent Threats (APTs)</li>
+                                        <li>Supply chain compromises</li>
+                                        <li>Nation-state attacks</li>
+                                        <li>Zero-day exploits</li>
+                                        <li>Significant data breaches</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="response-time">
+                                    <strong>Response Time:</strong> Immediate for critical infrastructure
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="agency-card">
+                            <div class="agency-header">
+                                <div class="agency-icon">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M16 2V30M2 16H30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        <path d="M26 6L6 26M6 6L26 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <h3>Federal Trade Commission (FTC)</h3>
+                            </div>
+                            <div class="agency-content">
+                                <p><strong>Primary Focus:</strong> Consumer protection and fraud prevention</p>
+                                <p><strong>Website:</strong> <a href="https://reportfraud.ftc.gov" target="_blank">reportfraud.ftc.gov</a></p>
+                                <p><strong>Phone:</strong> 1-877-FTC-HELP (1-877-382-4357)</p>
+                                
+                                <div class="agency-types">
+                                    <h4>Report These Incidents:</h4>
+                                    <ul>
+                                        <li>Consumer fraud and scams</li>
+                                        <li>Identity theft</li>
+                                        <li>Online shopping fraud</li>
+                                        <li>Tech support scams</li>
+                                        <li>Romance scams</li>
+                                        <li>Investment fraud</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="response-time">
+                                    <strong>Response Time:</strong> Automated confirmation, investigation varies
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="agency-card">
+                            <div class="agency-header">
+                                <div class="agency-icon">
+                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                        <path d="M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16Z" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M16 8V16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3>Local Law Enforcement</h3>
+                            </div>
+                            <div class="agency-content">
+                                <p><strong>Primary Focus:</strong> Local cybercrime investigation and immediate response</p>
+                                <p><strong>Contact:</strong> Your local police department or sheriff's office</p>
+                                <p><strong>When to Contact:</strong> Immediate threats or local impact incidents</p>
+                                
+                                <div class="agency-types">
+                                    <h4>Report These Incidents:</h4>
+                                    <ul>
+                                        <li>Cyberstalking and harassment</li>
+                                        <li>Threats of violence</li>
+                                        <li>Sextortion and exploitation</li>
+                                        <li>Local business fraud</li>
+                                        <li>Computer intrusion with local impact</li>
+                                        <li>Immediate physical threats</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="response-time">
+                                    <strong>Response Time:</strong> Immediate for emergencies
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="incident-response-steps">
+                    <h2>Incident Response Framework</h2>
+                    <div class="steps-grid">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Preparation</h3>
+                                <ul>
+                                    <li>Establish incident response team</li>
+                                    <li>Develop response procedures</li>
+                                    <li>Implement monitoring systems</li>
+                                    <li>Conduct regular training exercises</li>
+                                    <li>Maintain updated contact lists</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Identification</h3>
+                                <ul>
+                                    <li>Detect and analyze security events</li>
+                                    <li>Determine if incident occurred</li>
+                                    <li>Document initial findings</li>
+                                    <li>Assess potential impact</li>
+                                    <li>Classify incident severity</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Containment</h3>
+                                <ul>
+                                    <li>Isolate affected systems</li>
+                                    <li>Prevent further damage</li>
+                                    <li>Preserve evidence</li>
+                                    <li>Implement short-term fixes</li>
+                                    <li>Maintain business operations</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Eradication</h3>
+                                <ul>
+                                    <li>Remove malware and threats</li>
+                                    <li>Close attack vectors</li>
+                                    <li>Patch vulnerabilities</li>
+                                    <li>Update security controls</li>
+                                    <li>Strengthen defenses</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h3>Recovery</h3>
+                                <ul>
+                                    <li>Restore systems from clean backups</li>
+                                    <li>Implement additional monitoring</li>
+                                    <li>Gradually return to normal operations</li>
+                                    <li>Validate system integrity</li>
+                                    <li>Monitor for recurring issues</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">6</div>
+                            <div class="step-content">
+                                <h3>Lessons Learned</h3>
+                                <ul>
+                                    <li>Conduct post-incident review</li>
+                                    <li>Document lessons learned</li>
+                                    <li>Update response procedures</li>
+                                    <li>Improve security controls</li>
+                                    <li>Share intelligence with community</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reporting-best-practices">
+                    <h2>Effective Reporting Best Practices</h2>
+                    <div class="best-practices-grid">
+                        <div class="practice-card">
+                            <div class="practice-icon">📋</div>
+                            <h3>Document Everything</h3>
+                            <ul>
+                                <li>Maintain detailed incident logs</li>
+                                <li>Capture screenshots and evidence</li>
+                                <li>Record timestamps and sequences</li>
+                                <li>Preserve system logs and artifacts</li>
+                                <li>Document all response actions</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="practice-card">
+                            <div class="practice-icon">⚡</div>
+                            <h3>Act Quickly</h3>
+                            <ul>
+                                <li>Report incidents within 24 hours</li>
+                                <li>Implement immediate containment</li>
+                                <li>Notify stakeholders promptly</li>
+                                <li>Preserve evidence before it's lost</li>
+                                <li>Coordinate with legal and compliance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="practice-card">
+                            <div class="practice-icon">🎯</div>
+                            <h3>Provide Complete Information</h3>
+                            <ul>
+                                <li>Include all relevant technical details</li>
+                                <li>Specify affected systems and data</li>
+                                <li>Estimate impact and scope</li>
+                                <li>Provide accurate contact information</li>
+                                <li>Share indicators of compromise</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="practice-card">
+                            <div class="practice-icon">🔄</div>
+                            <h3>Follow Up Consistently</h3>
+                            <ul>
+                                <li>Track case numbers and references</li>
+                                <li>Provide updates as investigation progresses</li>
+                                <li>Respond to agency requests promptly</li>
+                                <li>Maintain communication channels</li>
+                                <li>Document final resolution</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <div class="cta-content">
+                        <h2>Need Expert Incident Response Support?</h2>
+                        <p>Our certified incident response team provides 24/7 emergency support and forensic investigation services</p>
+                        <div class="cta-actions">
+                            <a href="#emergency" class="btn btn-primary btn-lg">
+                                <span>Emergency Hotline</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M2 3H6L8 8L5.5 9.5C6.5 11.5 8.5 13.5 10.5 14.5L12 12L17 14V18C17 18.55 16.55 19 16 19C7.61 19 1 12.39 1 4C1 3.45 1.45 3 2 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <a href="safety-tips.html" class="btn btn-secondary btn-lg">
+                                <span>Prevention Guide</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2L35 10V18C35 27.5 28.5 36.5 20 38C11.5 36.5 5 27.5 5 18V10L20 2Z" fill="url(#footerLogoGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                            <defs>
+                                <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4facfe"/>
+                                    <stop offset="100%" style="stop-color:#00f2fe"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>CyberGuard Pro</span>
+                    </div>
+                    <p class="footer-desc">Advanced cybersecurity solutions for modern enterprises. Protecting your digital future.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Solutions</h4>
+                        <a href="cyber-threats.html">Threat Intelligence</a>
+                        <a href="safety-tips.html">Security Guidelines</a>
+                        <a href="report-crime.html">Incident Response</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <a href="#about">About Us</a>
+                        <a href="#careers">Careers</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <a href="#blog">Security Blog</a>
+                        <a href="#docs">Documentation</a>
+                        <a href="#support">Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 CyberGuard Pro. All rights reserved.</p>
+                </div>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#security">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
