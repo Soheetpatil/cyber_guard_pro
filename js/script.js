@@ -719,3 +719,537 @@ window.addEventListener('beforeunload', () => {
     trackEvent('Engagement', 'Time Spent', Math.round(timeSpent / 1000));
     trackEvent('Engagement', 'Max Scroll', Math.round(maxScroll));
 });
+
+// Threat Assessment Tool Functionality
+function calculateThreatScore() {
+    const form = document.querySelector('.assessment-form');
+    const industry = form.querySelector('input[name="industry"]:checked')?.value;
+    const size = form.querySelector('input[name="size"]:checked')?.value;
+    const remote = form.querySelector('input[name="remote"]:checked')?.value;
+    const training = form.querySelector('input[name="training"]:checked')?.value;
+    
+    if (!industry || !size || !remote || !training) {
+        showNotification('Please answer all questions to calculate your threat score', 'warning');
+        return;
+    }
+    
+    let score = 0;
+    let riskFactors = [];
+    
+    // Industry risk scoring
+    const industryRisk = {
+        'financial': 25,
+        'healthcare': 23,
+        'manufacturing': 18,
+        'retail': 20,
+        'technology': 22,
+        'other': 15
+    };
+    score += industryRisk[industry] || 15;
+    
+    // Size risk scoring
+    const sizeRisk = {
+        'small': 10,
+        'medium': 15,
+        'large': 20,
+        'enterprise': 25
+    };
+    score += sizeRisk[size] || 10;
+    
+    // Remote work risk
+    const remoteRisk = {
+        'none': 5,
+        'some': 10,
+        'most': 15,
+        'all': 20
+    };
+    score += remoteRisk[remote] || 5;
+    
+    // Training frequency (inverse scoring - less training = higher risk)
+    const trainingRisk = {
+        'never': 25,
+        'annual': 15,
+        'quarterly': 10,
+        'monthly': 5
+    };
+    score += trainingRisk[training] || 25;
+    
+    // Determine risk level and recommendations
+    let riskLevel, riskColor, recommendations;
+    
+    if (score <= 35) {
+        riskLevel = 'Low Risk';
+        riskColor = '#27ae60';
+        recommendations = [
+            'Maintain current security practices',
+            'Consider quarterly security reviews',
+            'Implement basic monitoring tools',
+            'Regular security awareness updates'
+        ];
+    } else if (score <= 55) {
+        riskLevel = 'Medium Risk';
+        riskColor = '#f39c12';
+        recommendations = [
+            'Implement comprehensive endpoint protection',
+            'Establish incident response procedures',
+            'Increase security training frequency',
+            'Deploy network monitoring solutions',
+            'Conduct vulnerability assessments'
+        ];
+    } else if (score <= 75) {
+        riskLevel = 'High Risk';
+        riskColor = '#e67e22';
+        recommendations = [
+            'Immediate security assessment required',
+            'Deploy advanced threat detection',
+            'Implement zero trust architecture',
+            'Monthly security training mandatory',
+            'Consider managed security services',
+            'Establish 24/7 monitoring'
+        ];
+    } else {
+        riskLevel = 'Critical Risk';
+        riskColor = '#e74c3c';
+        recommendations = [
+            'Urgent security overhaul needed',
+            'Engage professional security consultants',
+            'Implement comprehensive security stack',
+            'Weekly security training required',
+            'Deploy AI-powered threat hunting',
+            'Establish dedicated security team',
+            'Consider cyber insurance'
+        ];
+    }
+    
+    // Display results
+    const resultsDiv = document.getElementById('assessmentResults');
+    const scoreNumber = document.getElementById('scoreNumber');
+    const scoreDescription = document.getElementById('scoreDescription');
+    const recommendationsDiv = document.getElementById('recommendations');
+    
+    scoreNumber.textContent = score;
+    scoreNumber.style.color = riskColor;
+    
+    scoreDescription.innerHTML = `
+        <div style="color: ${riskColor}; font-weight: bold; font-size: 1.2em; margin-bottom: 10px;">
+            ${riskLevel}
+        </div>
+        <p>Based on your responses, your organization has a threat score of ${score}/100. This indicates ${riskLevel.toLowerCase()} exposure to cyber threats.</p>
+    `;
+    
+    recommendationsDiv.innerHTML = `
+        <h4>Recommended Actions:</h4>
+        <ul style="list-style: none; padding: 0;">
+            ${recommendations.map(rec => `
+                <li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                    <span style="color: ${riskColor}; margin-right: 10px;">•</span>
+                    ${rec}
+                </li>
+            `).join('')}
+        </ul>
+        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+            <strong>Next Steps:</strong> Contact our security experts for a personalized consultation and implementation roadmap.
+        </div>
+    `;
+    
+    resultsDiv.style.display = 'block';
+    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    // Track the assessment completion
+    trackEvent('Assessment', 'Completed', `Score: ${score} - ${riskLevel}`);
+    
+    showNotification(`Assessment complete! Your risk level: ${riskLevel}`, score > 55 ? 'warning' : 'info');
+}
+
+// Incident Form Handling
+document.addEventListener('DOMContentLoaded', function() {
+    const incidentForm = document.querySelector('.incident-form');
+    if (incidentForm) {
+        incidentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span>Submitting Report...</span>';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                showNotification('Incident report submitted successfully! Our team will contact you within 15 minutes.', 'success');
+                
+                // Reset form
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Track incident report
+                const incidentType = this.querySelector('#incidentType').value;
+                const severity = this.querySelector('#severity').value;
+                trackEvent('Incident Report', 'Submitted', `${incidentType} - ${severity}`);
+                
+            }, 2000);
+        });
+    }
+    
+    // Contact form handling
+    const contactForm = document.querySelector('.security-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span>Sending Request...</span>';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                showNotification('Thank you! Our security experts will contact you within 24 hours.', 'success');
+                
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                trackEvent('Contact Form', 'Submitted', 'Security Consultation');
+                
+            }, 1500);
+        });
+    }
+});
+
+// Enhanced accordion functionality for incident types
+document.addEventListener('DOMContentLoaded', function() {
+    const incidentItems = document.querySelectorAll('.incident-item');
+    
+    incidentItems.forEach(item => {
+        const header = item.querySelector('.incident-header');
+        const content = item.querySelector('.incident-content');
+        
+        if (header && content) {
+            // Initially hide content
+            content.style.display = 'none';
+            content.style.maxHeight = '0';
+            content.style.overflow = 'hidden';
+            content.style.transition = 'max-height 0.3s ease';
+            
+            header.style.cursor = 'pointer';
+            header.addEventListener('click', function() {
+                const isOpen = content.style.display !== 'none';
+                
+                // Close all other items
+                incidentItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        const otherContent = otherItem.querySelector('.incident-content');
+                        otherContent.style.display = 'none';
+                        otherContent.style.maxHeight = '0';
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                if (isOpen) {
+                    content.style.display = 'none';
+                    content.style.maxHeight = '0';
+                    item.classList.remove('active');
+                } else {
+                    content.style.display = 'block';
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    item.classList.add('active');
+                }
+            });
+        }
+    });
+});
+
+// Real-time threat intelligence updates (simulated)
+function initializeThreatIntelligence() {
+    const intelCards = document.querySelectorAll('.intel-card');
+    
+    if (intelCards.length > 0) {
+        // Simulate real-time updates
+        setInterval(() => {
+            const randomCard = intelCards[Math.floor(Math.random() * intelCards.length)];
+            const timestamp = randomCard.querySelector('.intel-timestamp');
+            
+            if (timestamp) {
+                const now = new Date();
+                const minutes = Math.floor(Math.random() * 60) + 1;
+                timestamp.textContent = `Updated ${minutes} minutes ago`;
+                
+                // Add pulse effect
+                randomCard.style.animation = 'pulse 0.5s ease-in-out';
+                setTimeout(() => {
+                    randomCard.style.animation = '';
+                }, 500);
+            }
+        }, 30000); // Update every 30 seconds
+    }
+}
+
+// Initialize threat intelligence on page load
+document.addEventListener('DOMContentLoaded', initializeThreatIntelligence);
+
+// Enhanced metrics dashboard with animations
+function animateMetrics() {
+    const metricNumbers = document.querySelectorAll('.metric-value, .stat-number, .score-number');
+    
+    metricNumbers.forEach(element => {
+        const finalValue = element.textContent;
+        const isPercentage = finalValue.includes('%');
+        const isTime = finalValue.includes('sec') || finalValue.includes('min') || finalValue.includes('days');
+        const isMoney = finalValue.includes('$') || finalValue.includes('M');
+        
+        let numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+        
+        if (isNaN(numericValue)) return;
+        
+        let currentValue = 0;
+        const increment = numericValue / 50; // 50 steps
+        const duration = 2000; // 2 seconds
+        const stepTime = duration / 50;
+        
+        const timer = setInterval(() => {
+            currentValue += increment;
+            
+            if (currentValue >= numericValue) {
+                currentValue = numericValue;
+                clearInterval(timer);
+            }
+            
+            let displayValue = Math.round(currentValue * 10) / 10;
+            
+            if (isPercentage) {
+                element.textContent = displayValue + '%';
+            } else if (isTime) {
+                if (finalValue.includes('sec')) {
+                    element.textContent = Math.round(displayValue) + ' sec';
+                } else if (finalValue.includes('min')) {
+                    element.textContent = Math.round(displayValue) + ' min';
+                } else if (finalValue.includes('days')) {
+                    element.textContent = Math.round(displayValue) + ' days';
+                }
+            } else if (isMoney) {
+                element.textContent = '$' + displayValue + 'M';
+            } else {
+                element.textContent = displayValue;
+            }
+        }, stepTime);
+    });
+}
+
+// Trigger metric animations when they come into view
+const metricObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateMetrics();
+            metricObserver.unobserve(entry.target);
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const metricsSection = document.querySelector('.security-metrics, .metrics-dashboard');
+    if (metricsSection) {
+        metricObserver.observe(metricsSection);
+    }
+});
+
+// Enhanced search functionality (placeholder for future implementation)
+function initializeSearch() {
+    // Create search overlay
+    const searchOverlay = document.createElement('div');
+    searchOverlay.className = 'search-overlay';
+    searchOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+    `;
+    
+    const searchBox = document.createElement('div');
+    searchBox.innerHTML = `
+        <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 90%;">
+            <h3 style="margin: 0 0 20px 0; color: #333;">Search Security Resources</h3>
+            <input type="text" placeholder="Search threats, best practices, or guidance..." 
+                   style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px;">
+            <div style="margin-top: 15px; text-align: right;">
+                <button onclick="closeSearch()" style="padding: 10px 20px; background: #6c757d; color: white; border: none; border-radius: 5px; margin-right: 10px; cursor: pointer;">Cancel</button>
+                <button onclick="performSearch()" style="padding: 10px 20px; background: #4facfe; color: white; border: none; border-radius: 5px; cursor: pointer;">Search</button>
+            </div>
+        </div>
+    `;
+    
+    searchOverlay.appendChild(searchBox);
+    document.body.appendChild(searchOverlay);
+    
+    // Global search function
+    window.openSearch = function() {
+        searchOverlay.style.display = 'flex';
+        searchBox.querySelector('input').focus();
+    };
+    
+    window.closeSearch = function() {
+        searchOverlay.style.display = 'none';
+    };
+    
+    window.performSearch = function() {
+        const query = searchBox.querySelector('input').value;
+        if (query.trim()) {
+            showNotification(`Searching for: "${query}" - Feature coming soon!`, 'info');
+            trackEvent('Search', 'Query', query);
+        }
+        closeSearch();
+    };
+    
+    // ESC to close search
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && searchOverlay.style.display === 'flex') {
+            closeSearch();
+        }
+    });
+}
+
+// Initialize search on page load
+document.addEventListener('DOMContentLoaded', initializeSearch);
+
+// Add pulse animation for critical alerts
+const pulseStyles = `
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+        70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+    }
+    
+    .intel-critical {
+        animation: pulse 2s infinite;
+    }
+    
+    .threat-card-critical {
+        border-left: 4px solid #e74c3c;
+    }
+    
+    .threat-card-high {
+        border-left: 4px solid #f39c12;
+    }
+    
+    .threat-card-medium {
+        border-left: 4px solid #3498db;
+    }
+`;
+
+// Inject pulse styles
+const pulseStyleSheet = document.createElement('style');
+pulseStyleSheet.textContent = pulseStyles;
+document.head.appendChild(pulseStyleSheet);
+
+// Enhanced error handling and user feedback
+window.addEventListener('error', function(e) {
+    console.error('JavaScript error:', e.error);
+    showNotification('An error occurred. Please refresh the page if issues persist.', 'error');
+});
+
+// Service worker registration for offline functionality (future enhancement)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        // Service worker registration would go here
+        console.log('Service worker support detected');
+    });
+}
+
+// Enhanced accessibility features
+document.addEventListener('DOMContentLoaded', function() {
+    // Add skip to content link
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main';
+    skipLink.textContent = 'Skip to main content';
+    skipLink.style.cssText = `
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: #000;
+        color: #fff;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+        z-index: 10000;
+        transition: top 0.3s;
+    `;
+    
+    skipLink.addEventListener('focus', function() {
+        this.style.top = '6px';
+    });
+    
+    skipLink.addEventListener('blur', function() {
+        this.style.top = '-40px';
+    });
+    
+    document.body.insertBefore(skipLink, document.body.firstChild);
+    
+    // Add main landmark if not present
+    const main = document.querySelector('main');
+    if (main && !main.id) {
+        main.id = 'main';
+    }
+});
+
+// Performance monitoring and optimization
+function monitorPerformance() {
+    if ('performance' in window && 'PerformanceObserver' in window) {
+        // Monitor Largest Contentful Paint
+        const lcpObserver = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            console.log('LCP:', lastEntry.startTime);
+            
+            if (lastEntry.startTime > 2500) {
+                console.warn('LCP is slower than recommended (2.5s)');
+            }
+        });
+        
+        lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+        
+        // Monitor First Input Delay
+        const fidObserver = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            entries.forEach((entry) => {
+                console.log('FID:', entry.processingStart - entry.startTime);
+            });
+        });
+        
+        fidObserver.observe({ entryTypes: ['first-input'] });
+    }
+}
+
+// Initialize performance monitoring
+document.addEventListener('DOMContentLoaded', monitorPerformance);
+
+// Add loading states to all forms
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const submitButton = this.querySelector('button[type="submit"], input[type="submit"]');
+            
+            if (submitButton && !submitButton.disabled) {
+                submitButton.classList.add('loading');
+                submitButton.disabled = true;
+                
+                // Re-enable after 5 seconds as fallback
+                setTimeout(() => {
+                    submitButton.classList.remove('loading');
+                    submitButton.disabled = false;
+                }, 5000);
+            }
+        });
+    });
+});
+
+console.log('CyberGuard Pro - Enhanced security website loaded successfully! 🛡️');
