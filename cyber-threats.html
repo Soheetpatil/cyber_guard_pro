@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Intelligence - CyberGuard Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html" class="nav-logo">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2L35 10V18C35 27.5 28.5 36.5 20 38C11.5 36.5 5 27.5 5 18V10L20 2Z" fill="url(#logoGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                            <path d="M20 8L28 12V18C28 24 24 29 20 30C16 29 12 24 12 18V12L20 8Z" fill="rgba(255,255,255,0.2)"/>
+                            <defs>
+                                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4facfe"/>
+                                    <stop offset="100%" style="stop-color:#00f2fe"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>CyberGuard Pro</span>
+                    </a>
+                    <div class="nav-tagline">Enterprise Security</div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Overview</a></li>
+                    <li><a href="cyber-threats.html" class="nav-link active">Threat Intelligence</a></li>
+                    <li><a href="safety-tips.html" class="nav-link">Best Practices</a></li>
+                    <li><a href="report-crime.html" class="nav-link">Incident Response</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="#contact" class="btn btn-outline-sm">Get Started</a>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="page-header-content">
+                    <div class="page-badge">
+                        <span class="badge-icon">⚠️</span>
+                        <span>Threat Intelligence</span>
+                    </div>
+                    <h1>Advanced Threat Detection</h1>
+                    <p>Comprehensive analysis of modern cyber threats and attack vectors targeting enterprise environments</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="threats-content">
+            <div class="container">
+                <div class="threats-grid">
+                    <div class="threat-card threat-card-critical">
+                        <div class="threat-header">
+                            <div class="threat-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                    <path d="M16 4L26 8V14C26 21 21 27 16 28C11 27 6 21 6 14V8L16 4Z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    <path d="M16 12V20M16 8H16.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="threat-meta">
+                                <h3>Phishing Attacks</h3>
+                                <div class="threat-level critical">Critical Risk</div>
+                            </div>
+                        </div>
+                        <div class="threat-content">
+                            <p>Sophisticated social engineering attacks designed to steal credentials and sensitive information through deceptive communications.</p>
+                            
+                            <div class="threat-details">
+                                <div class="detail-section">
+                                    <h4>Attack Vectors</h4>
+                                    <ul class="threat-list">
+                                        <li>Email spoofing and domain impersonation</li>
+                                        <li>Malicious links and attachments</li>
+                                        <li>Fake login pages and credential harvesting</li>
+                                        <li>Business email compromise (BEC)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h4>Warning Signs</h4>
+                                    <ul class="threat-list">
+                                        <li>Urgent or threatening language</li>
+                                        <li>Generic greetings and poor grammar</li>
+                                        <li>Suspicious sender addresses</li>
+                                        <li>Unexpected requests for sensitive data</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="threat-stats">
+                                <div class="stat">
+                                    <div class="stat-number">91%</div>
+                                    <div class="stat-label">of cyberattacks start with phishing</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">$4.9M</div>
+                                    <div class="stat-label">average cost of a data breach</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="threat-card threat-card-high">
+                        <div class="threat-header">
+                            <div class="threat-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                    <path d="M16 28C22.6274 28 28 22.6274 28 16C28 9.37258 22.6274 4 16 4C9.37258 4 4 9.37258 4 16C4 22.6274 9.37258 28 16 28Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M16 12V20M16 8H16.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="threat-meta">
+                                <h3>Ransomware</h3>
+                                <div class="threat-level high">High Risk</div>
+                            </div>
+                        </div>
+                        <div class="threat-content">
+                            <p>Malicious software that encrypts files and systems, demanding payment for decryption keys while causing significant operational disruption.</p>
+                            
+                            <div class="threat-details">
+                                <div class="detail-section">
+                                    <h4>Common Variants</h4>
+                                    <ul class="threat-list">
+                                        <li>Crypto-ransomware (file encryption)</li>
+                                        <li>Locker ransomware (system lockout)</li>
+                                        <li>Double extortion attacks</li>
+                                        <li>Ransomware-as-a-Service (RaaS)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h4>Entry Points</h4>
+                                    <ul class="threat-list">
+                                        <li>Email attachments and links</li>
+                                        <li>Remote desktop protocol (RDP) attacks</li>
+                                        <li>Software vulnerabilities</li>
+                                        <li>Malicious websites and downloads</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="threat-stats">
+                                <div class="stat">
+                                    <div class="stat-number">68%</div>
+                                    <div class="stat-label">of organizations hit by ransomware</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">21 days</div>
+                                    <div class="stat-label">average recovery time</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="threat-card threat-card-medium">
+                        <div class="threat-header">
+                            <div class="threat-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                    <path d="M16 2V30M2 16H30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M26 6L6 26M6 6L26 26" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="threat-meta">
+                                <h3>Social Engineering</h3>
+                                <div class="threat-level medium">Medium Risk</div>
+                            </div>
+                        </div>
+                        <div class="threat-content">
+                            <p>Psychological manipulation techniques used to trick individuals into divulging confidential information or performing actions that compromise security.</p>
+                            
+                            <div class="threat-details">
+                                <div class="detail-section">
+                                    <h4>Common Tactics</h4>
+                                    <ul class="threat-list">
+                                        <li>Pretexting and impersonation</li>
+                                        <li>Baiting with malicious media</li>
+                                        <li>Tailgating and physical access</li>
+                                        <li>Quid pro quo exchanges</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h4>Target Areas</h4>
+                                    <ul class="threat-list">
+                                        <li>Help desk and IT support</li>
+                                        <li>Reception and front desk staff</li>
+                                        <li>New employees and contractors</li>
+                                        <li>Executive assistants</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="threat-stats">
+                                <div class="stat">
+                                    <div class="stat-number">98%</div>
+                                    <div class="stat-label">of attacks rely on social engineering</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">43%</div>
+                                    <div class="stat-label">target small businesses</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="threat-card threat-card-high">
+                        <div class="threat-header">
+                            <div class="threat-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                    <path d="M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M16 8V16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="threat-meta">
+                                <h3>Advanced Persistent Threats</h3>
+                                <div class="threat-level high">High Risk</div>
+                            </div>
+                        </div>
+                        <div class="threat-content">
+                            <p>Sophisticated, long-term cyberattacks where attackers gain unauthorized access and remain undetected for extended periods.</p>
+                            
+                            <div class="threat-details">
+                                <div class="detail-section">
+                                    <h4>Attack Phases</h4>
+                                    <ul class="threat-list">
+                                        <li>Initial reconnaissance and targeting</li>
+                                        <li>Initial compromise and foothold</li>
+                                        <li>Lateral movement and escalation</li>
+                                        <li>Data exfiltration and persistence</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="detail-section">
+                                    <h4>Indicators</h4>
+                                    <ul class="threat-list">
+                                        <li>Unusual network traffic patterns</li>
+                                        <li>Unauthorized access attempts</li>
+                                        <li>Suspicious file modifications</li>
+                                        <li>Anomalous user behavior</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="threat-stats">
+                                <div class="stat">
+                                    <div class="stat-number">287 days</div>
+                                    <div class="stat-label">average time to detect</div>
+                                </div>
+                                <div class="stat">
+                                    <div class="stat-number">80 days</div>
+                                    <div class="stat-label">average time to contain</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <div class="cta-content">
+                        <h2>Stay Protected Against These Threats</h2>
+                        <p>Implement comprehensive security measures and best practices to defend against modern cyber threats</p>
+                        <div class="cta-actions">
+                            <a href="safety-tips.html" class="btn btn-primary btn-lg">
+                                <span>View Security Guide</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M4 10H16M16 10L12 6M16 10L12 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <a href="report-crime.html" class="btn btn-secondary btn-lg">
+                                <span>Report Incident</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2L35 10V18C35 27.5 28.5 36.5 20 38C11.5 36.5 5 27.5 5 18V10L20 2Z" fill="url(#footerLogoGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                            <defs>
+                                <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4facfe"/>
+                                    <stop offset="100%" style="stop-color:#00f2fe"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>CyberGuard Pro</span>
+                    </div>
+                    <p class="footer-desc">Advanced cybersecurity solutions for modern enterprises. Protecting your digital future.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Solutions</h4>
+                        <a href="cyber-threats.html">Threat Intelligence</a>
+                        <a href="safety-tips.html">Security Guidelines</a>
+                        <a href="report-crime.html">Incident Response</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Company</h4>
+                        <a href="#about">About Us</a>
+                        <a href="#careers">Careers</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <a href="#blog">Security Blog</a>
+                        <a href="#docs">Documentation</a>
+                        <a href="#support">Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 CyberGuard Pro. All rights reserved.</p>
+                </div>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#security">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
