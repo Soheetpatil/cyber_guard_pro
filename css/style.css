@@ -531,7 +531,7 @@ body {
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Features Section */
+/* Enhanced Feature Cards with Advanced Animations */
 .features {
     padding: var(--space-24) 0;
     position: relative;
@@ -553,6 +553,9 @@ body {
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: var(--space-4);
+    animation: shimmer 2s ease-in-out infinite;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.08) 75%);
+    background-size: 200% 100%;
 }
 
 .section-header h2 {
@@ -582,9 +585,10 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-2xl);
     padding: var(--space-8);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .feature-card::before {
@@ -593,22 +597,44 @@ body {
     inset: 0;
     background: linear-gradient(135deg, rgba(79, 172, 254, 0.05), rgba(0, 242, 254, 0.05));
     opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg) translateX(-100%);
+    transition: transform 0.6s ease;
 }
 
 .feature-card:hover::before {
     opacity: 1;
 }
 
+.feature-card:hover::after {
+    transform: rotate(45deg) translateX(100%);
+}
+
 .feature-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px) scale(1.02);
     border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: var(--shadow-2xl);
+    box-shadow: 
+        var(--shadow-2xl),
+        0 0 40px rgba(79, 172, 254, 0.2);
 }
 
 .feature-card-primary {
     background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.05));
     border-color: rgba(79, 172, 254, 0.2);
+}
+
+.feature-card-primary:hover {
+    animation: glowPulse 2s ease-in-out infinite;
 }
 
 .feature-icon {
@@ -621,6 +647,38 @@ body {
     border-radius: var(--radius-xl);
     margin-bottom: var(--space-6);
     color: var(--accent-blue);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: var(--radius-xl);
+}
+
+.feature-card:hover .feature-icon {
+    transform: rotateY(360deg) scale(1.1);
+    color: white;
+}
+
+.feature-card:hover .feature-icon::before {
+    opacity: 1;
+}
+
+.feature-icon svg {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-icon svg {
+    transform: scale(1.2);
 }
 
 .feature-content h3 {
@@ -628,6 +686,11 @@ body {
     font-weight: 700;
     color: white;
     margin-bottom: var(--space-3);
+    transition: color 0.3s ease;
+}
+
+.feature-card:hover .feature-content h3 {
+    color: var(--accent-cyan);
 }
 
 .feature-content p {
@@ -635,6 +698,11 @@ body {
     color: rgba(255, 255, 255, 0.7);
     line-height: 1.6;
     margin-bottom: var(--space-6);
+    transition: color 0.3s ease;
+}
+
+.feature-card:hover .feature-content p {
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .feature-list {
@@ -648,11 +716,29 @@ body {
     margin-bottom: var(--space-2);
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideInLeft 0.6s ease forwards;
+}
+
+.feature-list-item:nth-child(1) { animation-delay: 0.1s; }
+.feature-list-item:nth-child(2) { animation-delay: 0.2s; }
+.feature-list-item:nth-child(3) { animation-delay: 0.3s; }
+
+.feature-card:hover .feature-list-item {
+    color: rgba(255, 255, 255, 0.95);
+    transform: translateX(5px);
 }
 
 .check-icon {
     color: var(--accent-cyan);
     font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .check-icon {
+    animation: heartbeat 1.5s ease-in-out infinite;
 }
 
 .feature-link {
@@ -663,12 +749,37 @@ body {
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    transition: width 0.3s ease;
+}
+
+.feature-link:hover::before {
+    width: 100%;
 }
 
 .feature-link:hover {
     color: var(--accent-cyan);
-    transform: translateX(4px);
+    transform: translateX(8px);
+}
+
+.feature-link svg {
+    transition: transform 0.3s ease;
+}
+
+.feature-link:hover svg {
+    transform: translateX(4px) rotate(45deg);
 }
 
 /* Trust Section */
