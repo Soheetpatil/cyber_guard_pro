@@ -254,7 +254,7 @@ body {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
-/* Professional Button System */
+/* Enhanced Button System with Advanced Animations */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -265,7 +265,7 @@ body {
     text-decoration: none;
     border: none;
     cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -277,11 +277,33 @@ body {
     inset: 0;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     opacity: 0;
-    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    border-radius: 50%;
 }
 
 .btn:hover::before {
     opacity: 1;
+}
+
+.btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:active {
+    transform: scale(0.95);
 }
 
 /* Button Sizes */
@@ -308,11 +330,27 @@ body {
     background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
     color: white;
     box-shadow: var(--shadow-lg);
+    position: relative;
+}
+
+.btn-primary::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-xl);
+    transform: translateY(-3px);
+    box-shadow: 
+        var(--shadow-xl),
+        0 0 30px rgba(79, 172, 254, 0.4);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.btn-primary svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover svg {
+    transform: translateX(4px);
 }
 
 .btn-secondary {
@@ -320,12 +358,18 @@ body {
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(12px);
+    position: relative;
+}
+
+.btn-secondary::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
 }
 
 .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .btn-outline-sm {
@@ -335,12 +379,42 @@ body {
     padding: var(--space-2) var(--space-4);
     font-size: 0.875rem;
     border-radius: var(--radius-full);
+    position: relative;
+}
+
+.btn-outline-sm::before {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
 }
 
 .btn-outline-sm:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.4);
     color: white;
+    transform: scale(1.05);
+}
+
+/* Loading Animation for Buttons */
+.btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: translateY(-50%) rotate(360deg); }
 }
 
 /* Enhanced Hero Section with Animations */
