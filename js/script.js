@@ -1,16 +1,24 @@
-// Enhanced Mobile Navigation and Professional Interactions
+// Enhanced Mobile Navigation and Professional Interactions with Advanced Animations
 document.addEventListener('DOMContentLoaded', function() {
     // Navigation functionality
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navbar = document.querySelector('.navbar');
 
-    // Mobile menu toggle
+    // Mobile menu toggle with enhanced animations
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            
+            // Add stagger animation to menu items
+            if (navMenu.classList.contains('active')) {
+                const menuItems = navMenu.querySelectorAll('.nav-link');
+                menuItems.forEach((item, index) => {
+                    item.style.animation = `slideInRight 0.3s ease ${index * 0.1}s both`;
+                });
+            }
         });
 
         // Close mobile menu when clicking on a link
@@ -87,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Intersection Observer for scroll animations
+    // Enhanced Intersection Observer for advanced scroll animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -96,27 +104,48 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                entry.target.classList.add('animate-in');
+                const element = entry.target;
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+                
+                // Add different animation classes based on element type
+                if (element.classList.contains('feature-card')) {
+                    element.classList.add('animate-bounce');
+                } else if (element.classList.contains('stat-card')) {
+                    element.classList.add('animate-flip');
+                } else if (element.classList.contains('trust-item')) {
+                    element.classList.add('animate-rotate');
+                } else if (element.classList.contains('testimonial-card')) {
+                    element.classList.add('animate-left');
+                } else if (element.classList.contains('insight-card')) {
+                    element.classList.add('animate-right');
+                } else {
+                    element.classList.add('animate-in');
+                }
+                
+                // Trigger counter animations for stat numbers
+                if (element.querySelector('.stat-number, .metric-value')) {
+                    animateCounters(element);
+                }
             }
         });
     }, observerOptions);
 
-    // Observe elements for animation
+    // Observe elements for animation with staggered delays
     const animateElements = document.querySelectorAll(`
         .feature-card, .threat-card, .tip-category, .agency-card, 
-        .step-card, .practice-card, .trust-item, .checklist-item
+        .step-card, .practice-card, .trust-item, .checklist-item,
+        .stat-card, .testimonial-card, .insight-card, .solution-category
     `);
     
     animateElements.forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = `all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.1}s`;
+        el.style.transform = 'translateY(50px)';
+        el.style.transition = `all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.1}s`;
         observer.observe(el);
     });
 
-    // Enhanced Security Checklist functionality
+    // Enhanced Security Checklist functionality with celebrations
     const checklistItems = document.querySelectorAll('.checklist-item input[type="checkbox"]');
     
     checklistItems.forEach((checkbox, index) => {
@@ -132,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (this.checked) {
                 listItem.classList.add('completed');
+                createFireworksEffect(listItem);
                 createCelebrationEffect(listItem);
                 showNotification('Security task completed! 🎉', 'success');
                 
@@ -141,7 +171,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (completedItems === totalItems) {
                     setTimeout(() => {
-                        showNotification('Congratulations! All security tasks completed! 🏆', 'success');
+                        createMegaCelebration();
+                        showNotification('🏆 CONGRATULATIONS! All security tasks completed! You\'re now cyber-secure! 🛡️', 'success');
                     }, 1000);
                 }
             } else {
@@ -150,30 +181,60 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Create scroll-to-top button
+    // Create scroll-to-top button with enhanced animations
     createScrollToTopButton();
 
-    // Button hover effects
+    // Enhanced button hover effects with ripple animation
     document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('mouseenter', function() {
             if (!this.classList.contains('loading')) {
-                this.style.transform = 'translateY(-2px)';
+                this.style.transform = 'translateY(-3px) scale(1.02)';
             }
         });
         
         btn.addEventListener('mouseleave', function() {
             if (!this.classList.contains('loading')) {
-                this.style.transform = 'translateY(0)';
+                this.style.transform = 'translateY(0) scale(1)';
             }
+        });
+
+        // Add ripple effect on click
+        btn.addEventListener('click', function(e) {
+            createRippleEffect(e, this);
         });
     });
 
-    // Enhanced external link handling
+    // Enhanced external link handling with loading animations
     document.querySelectorAll('a[href^="http"]').forEach(link => {
-        // Add external link indicator
-        if (!link.querySelector('svg')) {
-            link.innerHTML += ' <span style="opacity: 0.7; font-size: 0.8em;">↗</span>';
+        // Add external link indicator with animation
+        if (!link.querySelector('svg') && !link.querySelector('.external-icon')) {
+            const icon = document.createElement('span');
+            icon.className = 'external-icon';
+            icon.innerHTML = ' ↗';
+            icon.style.cssText = `
+                opacity: 0.7; 
+                font-size: 0.8em; 
+                transition: all 0.3s ease;
+                display: inline-block;
+            `;
+            link.appendChild(icon);
         }
+        
+        link.addEventListener('mouseenter', function() {
+            const icon = this.querySelector('.external-icon');
+            if (icon) {
+                icon.style.transform = 'translate(2px, -2px) rotate(45deg)';
+                icon.style.opacity = '1';
+            }
+        });
+
+        link.addEventListener('mouseleave', function() {
+            const icon = this.querySelector('.external-icon');
+            if (icon) {
+                icon.style.transform = 'translate(0, 0) rotate(0deg)';
+                icon.style.opacity = '0.7';
+            }
+        });
         
         link.addEventListener('click', function(e) {
             this.classList.add('loading');
@@ -187,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Keyboard navigation support
+    // Enhanced keyboard navigation support
     document.addEventListener('keydown', function(e) {
         // ESC key closes mobile menu
         if (e.key === 'Escape') {
@@ -201,13 +262,39 @@ document.addEventListener('DOMContentLoaded', function() {
         // Ctrl/Cmd + K for search (placeholder)
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
-            showNotification('Search functionality coming soon! 🔍', 'info');
+            showNotification('🔍 Advanced search functionality coming soon!', 'info');
+        }
+
+        // Arrow keys for navigation (Easter egg)
+        if (e.key === 'ArrowUp' && e.shiftKey) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        if (e.key === 'ArrowDown' && e.shiftKey) {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
     });
 
-    // Form validation enhancement
+    // Enhanced form validation with real-time feedback
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
+        const inputs = form.querySelectorAll('input, textarea, select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.boxShadow = '0 0 20px rgba(79, 172, 254, 0.3)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '';
+            });
+
+            input.addEventListener('input', function() {
+                validateFieldRealTime(this);
+            });
+        });
+
         form.addEventListener('submit', function(e) {
             const requiredFields = form.querySelectorAll('[required]');
             let isValid = true;
@@ -217,21 +304,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     isValid = false;
                     field.style.borderColor = '#ef4444';
                     field.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+                    field.style.animation = 'wiggle 0.5s ease-in-out';
                     
                     // Remove error styling after user starts typing
                     field.addEventListener('input', function() {
                         this.style.borderColor = '';
                         this.style.backgroundColor = '';
+                        this.style.animation = '';
                     }, { once: true });
                 }
             });
             
             if (!isValid) {
                 e.preventDefault();
-                showNotification('Please fill in all required fields', 'error');
+                showNotification('⚠️ Please fill in all required fields', 'error');
             }
         });
     });
+
+    // Initialize floating particles background
+    createFloatingParticles();
+
+    // Initialize parallax scrolling effects
+    initializeParallaxEffects();
 
     // Performance monitoring
     if ('performance' in window) {
