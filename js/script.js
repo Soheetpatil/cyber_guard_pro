@@ -569,40 +569,276 @@ document.querySelectorAll('a[href^="http"]').forEach(link => {
     });
 });
 
-// Create celebration effect for completed checklist items
-function createCelebrationEffect(element) {
+// Advanced Animation Functions
+
+// Create ripple effect on button clicks
+function createRippleEffect(event, element) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple 0.6s ease-out;
+        pointer-events: none;
+        z-index: 1;
+    `;
+    
+    element.style.position = 'relative';
+    element.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Create fireworks effect for major celebrations
+function createFireworksEffect(element) {
     const rect = element.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    for (let i = 0; i < 12; i++) {
+    // Create multiple bursts
+    for (let burst = 0; burst < 3; burst++) {
+        setTimeout(() => {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: 6px;
+                    height: 6px;
+                    background: ${getRandomColor()};
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    left: ${centerX}px;
+                    top: ${centerY}px;
+                    box-shadow: 0 0 10px currentColor;
+                `;
+                
+                document.body.appendChild(particle);
+                
+                const angle = (i / 20) * Math.PI * 2;
+                const velocity = 150 + Math.random() * 100;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                particle.animate([
+                    { 
+                        transform: 'translate(0, 0) scale(1)', 
+                        opacity: 1 
+                    },
+                    { 
+                        transform: `translate(${vx}px, ${vy + 100}px) scale(0)`, 
+                        opacity: 0 
+                    }
+                ], {
+                    duration: 1500,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                }).onfinish = () => particle.remove();
+            }
+        }, burst * 200);
+    }
+}
+
+// Create mega celebration for completing all tasks
+function createMegaCelebration() {
+    // Screen flash effect
+    const flash = document.createElement('div');
+    flash.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #4facfe, #00f2fe, #4facfe);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9998;
+    `;
+    document.body.appendChild(flash);
+    
+    flash.animate([
+        { opacity: 0 },
+        { opacity: 0.3 },
+        { opacity: 0 }
+    ], {
+        duration: 500,
+        easing: 'ease-in-out'
+    }).onfinish = () => flash.remove();
+    
+    // Multiple fireworks across the screen
+    const positions = [
+        { x: window.innerWidth * 0.2, y: window.innerHeight * 0.3 },
+        { x: window.innerWidth * 0.8, y: window.innerHeight * 0.3 },
+        { x: window.innerWidth * 0.5, y: window.innerHeight * 0.2 },
+        { x: window.innerWidth * 0.3, y: window.innerHeight * 0.6 },
+        { x: window.innerWidth * 0.7, y: window.innerHeight * 0.6 }
+    ];
+    
+    positions.forEach((pos, index) => {
+        setTimeout(() => {
+            createFireworksAtPosition(pos.x, pos.y);
+        }, index * 300);
+    });
+}
+
+function createFireworksAtPosition(x, y) {
+    for (let i = 0; i < 30; i++) {
         const particle = document.createElement('div');
         particle.style.cssText = `
             position: fixed;
             width: 8px;
             height: 8px;
-            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            background: ${getRandomColor()};
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            left: ${centerX}px;
-            top: ${centerY}px;
+            left: ${x}px;
+            top: ${y}px;
+            box-shadow: 0 0 15px currentColor;
         `;
         
         document.body.appendChild(particle);
         
-        const angle = (i / 12) * Math.PI * 2;
-        const velocity = 100 + Math.random() * 50;
+        const angle = (i / 30) * Math.PI * 2;
+        const velocity = 100 + Math.random() * 150;
         const vx = Math.cos(angle) * velocity;
         const vy = Math.sin(angle) * velocity;
         
         particle.animate([
-            { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-            { transform: `translate(${vx}px, ${vy}px) scale(0)`, opacity: 0 }
+            { 
+                transform: 'translate(0, 0) scale(1)', 
+                opacity: 1 
+            },
+            { 
+                transform: `translate(${vx}px, ${vy + 200}px) scale(0)`, 
+                opacity: 0 
+            }
         ], {
-            duration: 800,
+            duration: 2000,
             easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
         }).onfinish = () => particle.remove();
+    }
+}
+
+function getRandomColor() {
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dda0dd', '#98d8c8', '#f7dc6f'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Animate counters with easing
+function animateCounters(container) {
+    const counters = container.querySelectorAll('.stat-number, .metric-value');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.textContent.replace(/[^\d]/g, '')) || 0;
+        if (target === 0) return;
+        
+        let current = 0;
+        const increment = target / 60; // 60 frames for smooth animation
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            
+            const suffix = counter.textContent.replace(/[\d.]/g, '');
+            counter.textContent = Math.floor(current) + suffix;
+        }, 16); // ~60fps
+    });
+}
+
+// Create floating particles background
+function createFloatingParticles() {
+    const particleContainer = document.createElement('div');
+    particleContainer.className = 'floating-particles';
+    particleContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+    `;
+    document.body.appendChild(particleContainer);
+    
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+            position: absolute;
+            width: ${Math.random() * 6 + 2}px;
+            height: ${Math.random() * 6 + 2}px;
+            background: rgba(79, 172, 254, ${Math.random() * 0.3 + 0.1});
+            border-radius: 50%;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            animation: floatParticle ${Math.random() * 20 + 15}s linear infinite;
+        `;
+        particleContainer.appendChild(particle);
+    }
+}
+
+// Initialize parallax scrolling effects
+function initializeParallaxEffects() {
+    const parallaxElements = document.querySelectorAll('.hero-glow, .hero-grid');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        
+        parallaxElements.forEach(element => {
+            element.style.transform = `translateY(${rate}px)`;
+        });
+    });
+}
+
+// Real-time form field validation
+function validateFieldRealTime(field) {
+    const value = field.value.trim();
+    const type = field.type;
+    
+    // Remove previous validation classes
+    field.classList.remove('valid', 'invalid');
+    
+    if (value === '') return;
+    
+    let isValid = true;
+    
+    switch (type) {
+        case 'email':
+            isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+            break;
+        case 'tel':
+            isValid = /^[\+]?[1-9][\d]{0,15}$/.test(value.replace(/\s/g, ''));
+            break;
+        case 'url':
+            isValid = /^https?:\/\/.+/.test(value);
+            break;
+        default:
+            isValid = value.length >= 2;
+    }
+    
+    if (isValid) {
+        field.classList.add('valid');
+        field.style.borderColor = '#27ae60';
+        field.style.backgroundColor = 'rgba(39, 174, 96, 0.1)';
+    } else {
+        field.classList.add('invalid');
+        field.style.borderColor = '#e74c3c';
+        field.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
     }
 }
 
